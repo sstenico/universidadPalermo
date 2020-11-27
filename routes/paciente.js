@@ -56,6 +56,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+//elimino un paciente
 router.delete ('/:pacienteid', async (req, res) => {
     try {
        const deletepacienteid = await PostP.remove({_id: req.params.pacienteid});
@@ -65,5 +66,16 @@ router.delete ('/:pacienteid', async (req, res) => {
     }
 });
 
+router.put ('/:pacienteid', async (req, res) => {
+    try {
+       const updatepacienteid = await PostP.updateOne(
+                {_id: req.params.pacienteid},
+                {$set: {covid: req.body.covid, vacuna: req.body.vacuna}}
+                );
+       res.json(updatepacienteid);
+    }catch(err){
+        res.json({message: err});
+    }
+});
 
 module.exports = router;
