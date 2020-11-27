@@ -24,11 +24,8 @@ router.get('/id/:pacienteid', async (req, res) => {
 //busco por querystring
 router.get('/q', async (req, res) => {
     try {
-        console.log(req.query.nombre);
-        console.log(req.query.covid);
         let respuesta = 'no hay informacion para los valores ingresados. ';
         const getpacientequery = await PostP.find({nombre: req.query.nombre, covid: req.query.covid});
-        console.log(getpacientequery.length);
 
         if (getpacientequery.length == 0 )
             res.json(respuesta +'nombre: ' + req.query.nombre +  ' - covid: ' + req.query.covid);
