@@ -30,41 +30,6 @@ app.use(function(req, res, next) {
   };
   res.status(404).send(respuesta);
  });
-/*
-
-app.put('/paciente', function (req, res) {
- if(!req.body.nombre || !req.body.apellido) {
-  respuesta = {
-   error: true,
-   codigo: 502,
-   mensaje: 'El campo nombre y apellido son requeridos'
-  };
- } else {
-  if(paciente.nombre === '' || paciente.apellido === '') {
-   respuesta = {
-    error: true,
-    codigo: 501,
-    mensaje: 'El paciente no ha sido creado'
-   };
-  } else {
-    paciente = {
-    nombre: req.body.nombre,
-    apellido: req.body.apellido,
-    covid: req.body.covid,
-    vacuna: req.body.vacuna
-   };
-   respuesta = {
-    mensaje: 'Paciente actualizado',
-    respuesta: paciente
-   };
-  }
- }
- 
- res.send(respuesta);
-});
-
-
-*/
 
 // conexion db
 mongoose.connect(

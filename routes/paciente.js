@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 });
 
 /* busco un paciente especifico */
-router.get('/:pacienteid', async (req, res) => {
+router.get('/id/:pacienteid', async (req, res) => {
     try {
        const getpacienteid = await PostP.findById(req.params.pacienteid);
        res.json(getpacienteid);
@@ -21,12 +21,19 @@ router.get('/:pacienteid', async (req, res) => {
     }
 });
 
-//busco por nombre
-router.get('/api/:covid', async (req, res) => {
+//busco por querystring
+router.get('/q', async (req, res) => {
     try {
-        console.log(req.params.name);
-        const getpacientecovid = await PostP.find({covid: req.params.covid});
-        res.json(getpacientecovid);
+        console.log(req.query.nombre);
+        console.log(req.query.covid);
+        let respuesta = 'no hay informacion para los valores ingresados. ';
+        const getpacientequery = await PostP.find({nombre: req.query.nombre, covid: req.query.covid});
+        console.log(getpacientequery.length);
+
+        if (getpacientequery.length == 0 )
+            res.json(respuesta +'nombre: ' + req.query.nombre +  ' - covid: ' + req.query.covid);
+        else
+            res.json(getpacientequery);
     }catch(err){
         res.json({message: err});
     }
